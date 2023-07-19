@@ -10,7 +10,7 @@ import Icon, {
   StarOutlined,
   UsergroupDeleteOutlined,
 } from '@ant-design/icons';
-import logo from 'assets/logo-new.png';
+import logo from 'assets/logo_1.png';
 import './styles.less';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -55,7 +55,12 @@ const DashboardSider = () => {
           />
         </div>
       )}
-      <Menu theme="light" mode="inline" className="menu-list" defaultSelectedKeys={['0']}>
+      <Menu
+        theme="light"
+        mode="inline"
+        className="menu-list"
+        defaultSelectedKeys={['0']}
+      >
         <>
           <Menu.Item
             key="0"
@@ -64,9 +69,8 @@ const DashboardSider = () => {
           >
             Dashboard
           </Menu.Item>
-          {localStorage.getItem('__role') === 'R03' && (
+          {localStorage.getItem('__role') === 'admin' && (
             <>
-
               <Menu.Item
                 key="1"
                 icon={<PieChartOutlined />}
@@ -104,17 +108,17 @@ const DashboardSider = () => {
               </Menu.Item>
             </>
           )}
-          {(localStorage.getItem('__role') === 'R04' ||
-            localStorage.getItem('__role') === 'R05') && (
-              <Menu.Item
-                key="3"
-                icon={<OrderedListOutlined />}
-                onClick={() => navigate('/dashboard/order')}
-              >
-                Order
-              </Menu.Item>
-            )}
-          {localStorage.getItem('__role') === 'R00' && (
+          {(localStorage.getItem('__role') === 'admin' ||
+            localStorage.getItem('__role') === 'admin') && (
+            <Menu.Item
+              key="3"
+              icon={<OrderedListOutlined />}
+              onClick={() => navigate('/dashboard/order')}
+            >
+              Order
+            </Menu.Item>
+          )}
+          {localStorage.getItem('__role') === 'admin' && (
             <Menu.Item
               key="6"
               icon={<UsergroupDeleteOutlined />}

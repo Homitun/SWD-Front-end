@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, message, Row, Select } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import bgLogin from 'assets/bgLogin.png';
-import logo from 'assets/logo-new.png';
+import logo from 'assets/logo_1.png';
 import { loginInitiate } from 'redux/action';
 import './styles.less';
 import axiosClient from 'util/axiosClient';

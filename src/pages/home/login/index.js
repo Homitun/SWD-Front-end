@@ -4,7 +4,7 @@ import { Button, Col, Form, Input, message, Row } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import bgLogin from 'assets/bgLogin.png';
-import logo from 'assets/logo-new.png';
+import logo from 'assets/logo_1.png';
 import { loginInitiate } from 'redux/action';
 import './styles.less';
 import axiosClient from 'util/axiosClient';
@@ -39,28 +39,28 @@ const Login = (props) => {
     if (isLogin) {
       //Load xong success
       if (currentUser?.role !== 'R02') {
-        if (currentUser?.role === 'R03') {
+        if (currentUser?.role === 'admin') {
           message.success('Đăng nhập thành công');
           setLoading(true);
           navigate('/dashboard');
           return;
         }
 
-        if (currentUser?.role === 'R04' || currentUser?.role === 'R05') {
+        if (currentUser?.role === 'admin' || currentUser?.role === 'admin') {
           message.success('Đăng nhập thành công');
           setLoading(true);
           navigate('/dashboard');
           return;
         }
 
-        if (currentUser?.role === 'R00') {
+        if (currentUser?.role === 'admin') {
           message.success('Đăng nhập thành công');
           setLoading(true);
           navigate('/dashboard');
           return;
         }
 
-        if (currentUser?.role === 'R01') {
+        if (currentUser?.role === 'admin') {
           try {
             //Take all cart item of guest to customer
             const cartGuest = await request('/cart/guest', {}, 'GET');

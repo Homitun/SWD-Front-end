@@ -27,7 +27,7 @@ function* login(action) {
       request,
       environment.api.login,
       {
-        email: username,
+        userName: username,
         password,
       },
       'POST'
@@ -36,15 +36,16 @@ function* login(action) {
     if (!data.token) {
       return;
     }
+    console.log('data', data);
     const decode_token = jwt.decode(data.token);
     const user = _.omit(data?.user, ['tokens']);
-    localStorage.setItem('__role', decode_token?.role);
+    localStorage.setItem('__role', decode_token?.roleId);
     localStorage.setItem('__token', data.token);
 
     yield put(
       authAction.loginSuccess({
         ...user,
-        role: decode_token?.role,
+        role: decode_token?.roleId,
       })
     );
   } catch (error) {

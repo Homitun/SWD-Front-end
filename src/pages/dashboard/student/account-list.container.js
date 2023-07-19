@@ -58,7 +58,7 @@ const AccountList = () => {
     setLoading(true);
     getUserList({ ...params })
       .then((result) => {
-        setUniList([...result?.users]);
+        setUniList([...result?.list]);
         console.log(result.count);
         setTotalItem(result?.count);
         setLoading(false);
@@ -94,19 +94,19 @@ const AccountList = () => {
       ellipsis: true,
       sorter: (a, b) => a._id.length - b._id.length,
     },
-    {
-      title: 'Họ tên',
-      dataIndex: 'fullName',
-      width: '12%',
-      ellipsis: true,
-      sorter: (a, b) => a.fullName.length - b.fullName.length,
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      width: '12%',
-      sorter: (a, b) => a.email.length - b.email.length,
-    },
+    // {
+    //   title: 'Họ tên',
+    //   dataIndex: 'fullName',
+    //   width: '12%',
+    //   ellipsis: true,
+    //   sorter: (a, b) => a.fullName.length - b.fullName.length,
+    // },
+    // {
+    //   title: 'Email',
+    //   dataIndex: 'email',
+    //   width: '12%',
+    //   sorter: (a, b) => a.email.length - b.email.length,
+    // },
     {
       title: 'Giới tính',
       dataIndex: 'gender',
@@ -150,8 +150,8 @@ const AccountList = () => {
         { text: 'saler', value: 'saler' },
         { text: 'saleManager', value: 'saleManager' },
       ],
-      onFilter: (text, record) => record?.role?.name === text,
-      render: (text) => text?.name,
+      onFilter: (text, record) => record?.role === text,
+      render: (text) => text,
       sorter: (a, b) => a?.role?.name?.length - b?.role?.name?.length,
     },
     {
@@ -185,24 +185,24 @@ const AccountList = () => {
         </Popconfirm>
       ),
     },
-    {
-      title: 'Avatar',
-      dataIndex: 'avatar',
-      key: 'avatar',
-      width: '12%',
-      render: (text, record) => {
-        if (record.avatar) {
-          return (
-            <Image
-              style={{ cursor: 'pointer' }}
-              src={record?.avatar?.img}
-              width={100}
-              alt="img"
-            />
-          );
-        } else return <Avatar src="https://joeschmoe.io/api/v1/random" />;
-      },
-    },
+    // {
+    //   title: 'Avatar',
+    //   dataIndex: 'avatar',
+    //   key: 'avatar',
+    //   width: '12%',
+    //   render: (text, record) => {
+    //     if (record.avatar) {
+    //       return (
+    //         <Image
+    //           style={{ cursor: 'pointer' }}
+    //           src={record?.avatar?.img}
+    //           width={100}
+    //           alt="img"
+    //         />
+    //       );
+    //     } else return <Avatar src="https://joeschmoe.io/api/v1/random" />;
+    //   },
+    // },
     {
       title: 'Action',
       align: 'center',
@@ -252,7 +252,7 @@ const AccountList = () => {
   return (
     <Layout className="layoutContent">
       <PageHeader
-        ghost={false}
+        gst={false}
         title="Account"
         extra={extraButton}
         breadcrumb={routes}

@@ -3,8 +3,8 @@ import axiosClient from 'util/axiosClient';
 //Get all products
 export const getProductDetailById = async (params) => {
   // eslint-disable-next-line quotes
-  const url = `/products/${params}`;
-  return axiosClient.get(url, { params });
+  const url = `/product/${params}`;
+  return axiosClient.get(url);
 };
 
 // Add to cart: customer
@@ -27,7 +27,7 @@ export const getCategoyById = async (params) => {
 
 // Get all products
 export const getProductListFearture = async (params) => {
-  const url = '/products?feartured=true&status=true&limit=5&page=1';
+  const url = '/product';
   return axiosClient.get(url, { params });
 };
 

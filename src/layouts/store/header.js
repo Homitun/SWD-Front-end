@@ -26,7 +26,7 @@ import {
 } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import './styles.less';
-import logoImg from 'assets/logo-new.png';
+import logoImg from 'assets/logo_1.png';
 import newlogo from 'assets/logo_1.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axiosClient from 'util/axiosClient';
@@ -69,7 +69,7 @@ const HeaderContainer = () => {
   const handleSearch = async (data) => {
     try {
       const lstProduct = await request(
-        '/products/search',
+        '/product',
         {
           searchText: data,
         },
@@ -174,7 +174,11 @@ const HeaderContainer = () => {
                 <Col span={2}>
                   <a onClick={() => navigate('/')}>
                     <img
-                      style={{ height: '48px', objectFit: 'cover', width: '100%' }}
+                      style={{
+                        height: '48px',
+                        objectFit: 'cover',
+                        width: '100%',
+                      }}
                       src={newlogo}
                       alt="logo image"
                     />
@@ -271,7 +275,7 @@ const HeaderContainer = () => {
                   </div>
                   <Dropdown
                     overlay={
-                      localStorage.getItem('__role') === 'R01'
+                      localStorage.getItem('__role') === 'user'
                         ? menuUser
                         : menuGuest
                     }

@@ -19,7 +19,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import bgLogin from 'assets/bgLogin.png';
-import logo from 'assets/logo-new.png';
+import logo from 'assets/logo_1.png';
 import { loginInitiate, registerInitiate } from 'redux/action';
 import './styles.less';
 import axiosClient from 'util/axiosClient';
@@ -50,6 +50,7 @@ const Register = (props) => {
       //REGISTER SUCESS
       .then(async (result) => {
         console.log(result);
+        
         setIsSendingEmail(true);
         // if (localStorage.getItem('__role') === 'R01') {
         //   console.log('ĐANG LẤY ĐỒ CHƠI NÀY');
@@ -150,12 +151,12 @@ const Register = (props) => {
                   validateMessages={validateMessages}
                 >
                   <Form.Item
-                    name="fullName"
-                    rules={[{ required: true, message: 'Nhập họ và tên!' }]}
+                    name="username"
+                    rules={[{ required: true, message: 'Nhập username!' }]}
                   >
                     <Input
                       prefix={<UserOutlined className="site-form-item-icon" />}
-                      placeholder="Họ và tên"
+                      placeholder="Username"
                     />
                   </Form.Item>
 
@@ -222,7 +223,7 @@ const Register = (props) => {
                       autoComplete="new-password"
                     />
                   </Form.Item>
-                  <Form.Item
+                  {/* <Form.Item
                     name="gender"
                     rules={[
                       {
@@ -236,7 +237,7 @@ const Register = (props) => {
                       <Select.Option value="F">female</Select.Option>
                       <Select.Option value="D">other</Select.Option>
                     </Select>
-                  </Form.Item>
+                  </Form.Item> */}
                   <Form.Item>
                     <Button
                       type="primary"
@@ -255,7 +256,7 @@ const Register = (props) => {
                   </p>
                 </Form>
               )}
-              {isSendingEmail && (
+              {/* {isSendingEmail && (
                 <Row>
                   <Col
                     style={{
@@ -314,7 +315,7 @@ const Register = (props) => {
                     </Row>
                   </Col>
                 </Row>
-              )}
+              )} */}
             </Col>
           </Row>
         </Col>

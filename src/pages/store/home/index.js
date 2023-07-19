@@ -11,7 +11,11 @@ import {
 } from 'antd';
 import React, { useEffect, useState } from 'react';
 import './styles.less';
-import { AntDesignOutlined, FireOutlined } from '@ant-design/icons';
+import {
+  AntDesignOutlined,
+  FireOutlined,
+  PicCenterOutlined,
+} from '@ant-design/icons';
 import WrapperConentContainer from 'layouts/store/wrapper.content';
 import StoreLayoutContainer from 'layouts/store/store.layout';
 import {
@@ -25,97 +29,8 @@ import { DateFormat, MoneyFormat } from 'components/format';
 import axios from 'axios';
 import axiosClient from 'util/axiosClient';
 import { getBlogList } from '../blog/service';
+import Paragraph from 'antd/lib/skeleton/Paragraph';
 
-const dataPostFeature = [
-  {
-    title:
-      'Sếp lớn Microsoft từ chức vì bị cáo buộc xem “phim heo VR” khi đang làm việc và cả quay tay',
-    date: '14/06/2022',
-    author: 'Hoàng Anh',
-    imgLink: 'https://gstatic.gvn360.com/2022/06/61fb127c75a1f5001890a621.jpg',
-  },
-  {
-    title: 'Tiếng chuông gọi người tình trở về – Ngân lên trong vô vọng!',
-    date: '11/06/2022',
-    author: 'Hải Yến',
-    imgLink:
-      'https://reviewsach.net/wp-content/uploads/2022/05/reviewsachonly-Tieng-chuong-goi-nguoi-tinh-tro-ve.jpg',
-  },
-  {
-    title: 'Cho tôi xin một vé về tuổi thơ – tấm vé dành cho sự trưởng thành',
-    date: '22/06/2022',
-    author: 'Asu',
-    imgLink:
-      'https://reviewsach.net/wp-content/uploads/2022/03/review-sach-cho-toi-xin-mot-ve-tuoi-tho.jpeg',
-  },
-  {
-    title: 'Tình khờ – Khi cái đẹp đồng hóa cùng quỷ dữ (Tanizaki Junichiro)',
-    date: '30/06/2022',
-    author: 'Lê Đức',
-    imgLink:
-      'https://reviewsach.net/wp-content/uploads/2022/03/review-sach-tinh-kho-by-reviewsachl.net_.jpeg',
-  },
-];
-const dataListCates = [
-  {
-    name: 'Adventure',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/9/7/9780451530943_1.jpg',
-  },
-  {
-    name: 'Lifestyle',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_25243.jpg',
-  },
-  {
-    name: 'Sách giáo khoa',
-    imgLink: 'https://cdn0.fahasa.com/media/catalog/product/c/o/combo-8_3.jpg',
-  },
-  {
-    name: 'Tâm lý kỹ năng',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/8/9/8934974109105-t13.jpg',
-  },
-  {
-    name: 'Kinh tế',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/9/7/9786043026542_1.jpg',
-  },
-  {
-    name: 'Sách tham khảo',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/i/m/image_180049.jpg',
-  },
-  {
-    name: 'Văn học',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/i/m/image_195509_1_39444.jpg',
-  },
-  {
-    name: 'Foreigns Books',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/9/7/9786041055421.jpg',
-  },
-  {
-    name: 'Thiếu nhi',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/c/o/cover_lhmn20.jpg',
-  },
-  {
-    name: 'Sách học ngoại ngữ',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/i/m/image_185738.jpg',
-  },
-  {
-    name: 'Văn phòng phẩm',
-    imgLink: 'https://cdn0.fahasa.com/media/catalog/product/i/m/img-8376.jpg',
-  },
-  {
-    name: 'Đồ chơi',
-    imgLink:
-      'https://cdn0.fahasa.com/media/catalog/product/e/b/eb7f9af9bc5cb8e852f206448b13d556.jpg',
-  },
-];
 
 const HomePage = () => {
   //redux
@@ -183,10 +98,10 @@ const HomePage = () => {
   console.log(posts);
   return (
     <>
-      <WrapperConentContainer className="home-sliders">
-        <Row style={{ height: '100%' }}>
+      {/* <WrapperConentContainer className="home-sliders">
+        { <Row style={{ height: '100%' }}>
           <Col className="slider-main" span={16}>
-            {/* <Carousel style={{ width: '98.5%' }} autoplay>
+            <Carousel style={{ width: '98.5%' }} autoplay>
               {sliders &&
                 sliders.map((slider) => (
                   <a
@@ -201,9 +116,9 @@ const HomePage = () => {
                     />
                   </a>
                 ))}
-            </Carousel> */}
+            </Carousel>
           </Col>
-          {/* <Col className="slider-sides" span={8}>
+          <Col className="slider-sides" span={8}>
             <Row style={{ height: '100%' }} gutter={[0, 10]}>
               <Col className="slider-side" span={24}>
                 <a href={sliders && sliders[0]?.backlink}>
@@ -216,8 +131,53 @@ const HomePage = () => {
                 </a>
               </Col>
             </Row>
-          </Col> */}
-        </Row>
+          </Col>
+        </Row>  */}
+
+      <WrapperConentContainer className="home-sliders">
+        {
+          <Row style={{ height: '100%' }} justify="center">
+            <h1
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: '22px',
+              }}
+            >
+              HỆ THỐNG SHOP CỬA HÀNG THỨC ĂN CHO CHIM CẢNH
+            </h1>
+            <p
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: '15px',
+              }}
+            >
+              Chào mừng đến với hệ thống cửa hàng thức ăn chim cảnh! Chúng tôi
+              tự hào là một hệ thống cửa hàng đáng tin cậy và chuyên nghiệp
+              chuyên cung cấp thực phẩm chất lượng cao cho chim cảnh yêu quý của
+              bạn. Với đội ngũ nhân viên giàu kinh nghiệm và yêu thương động
+              vật, chúng tôi cam kết mang đến cho bạn những sản phẩm tốt nhất để
+              nuôi dưỡng và chăm sóc sức khỏe cho các loài chim cảnh.
+            </p>
+
+            <Col className="slider-main" span={24}>
+              {/* Chèn video từ YouTube vào đây */}
+              <iframe
+                width="100%"
+                height="500"
+                src="https://www.youtube.com/embed/lrwAgmZYi_s"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer;
+         autoplay; clipboard-write; 
+         encrypted-media; gyroscope;
+          picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </Col>
+          </Row>
+        }
       </WrapperConentContainer>
       {/* <Row className="home-posts">
         <Col span={16} offset={4}>
@@ -281,7 +241,7 @@ const HomePage = () => {
         </Col>
       </Row> */}
       <WrapperConentContainer className="home-categories">
-        <Row className="categories-content">
+        {/* <Row className="categories-content">
           <h2
             style={{
               display: 'flex',
@@ -331,7 +291,7 @@ const HomePage = () => {
               </Col>
             ))}
           </Row>
-        </Row>
+        </Row> */}
       </WrapperConentContainer>
       <WrapperConentContainer className="home-products-featured">
         <Row className="products-content">
@@ -352,7 +312,7 @@ const HomePage = () => {
                 borderRadius: '100%',
               }}
             />
-            Xu hướng mua sắm
+            CÁC SẢN PHẨM BÁN CHẠY
           </h2>
           <Divider style={{ margin: '18px 0' }} />
           <Row justify="space-evenly">
@@ -371,8 +331,11 @@ const HomePage = () => {
                           // objectFit: 'cover',
                           margin: '0 auto',
                         }}
+                        
                         alt="example"
-                        src={"https://cdn0.fahasa.com/media/catalog/product/k/a/kaguya-sama-cuoc-chien-to-tinh_bia_postcard_tap-17.jpg"}
+                        src={
+                          item.image
+                        }
                       />
                     </a>
                   }

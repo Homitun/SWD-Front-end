@@ -65,7 +65,7 @@ const App = () => {
               <Route path="/blog/:blogId" element={<BlogListDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/cart-contact" element={<CartContact />} />
-              <Route path="/cart-completion/:id" element={<CartCompletion />} /> 
+              <Route path="/cart-completion/:id" element={<CartCompletion />} />
               //Protected route
               <Route element={<ProtectedRoute allowedRoles={['R01']} />}>
                 <Route path="/order-list" element={<OrderList />} />
@@ -86,11 +86,7 @@ const App = () => {
             <Route path="/verify-account/:id" element={<VerifyAccountPage />} />
           </Routes>
           <Routes>
-            <Route
-              element={
-                <ProtectedRoute allowedRoles={['R00', 'R03', 'R04', 'R05']} />
-              }
-            >
+            <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
               <Route
                 path="dashboard"
                 element={
@@ -100,20 +96,20 @@ const App = () => {
                   />
                 }
               >
-                {currentUser?.role === 'R00' && (
+                {currentUser?.role === 'admin' && (
                   <Route path="" element={<AdminDashboard />} />
                 )}
-                {(currentUser?.role === 'R05' ||
-                  currentUser?.role === 'R04') && (
-                    <Route path="" element={<SaleDashboard />} />
-                  )}
-                {currentUser?.role === 'R03' && (
+                {(currentUser?.role === 'admin' ||
+                  currentUser?.role === 'admin') && (
+                  <Route path="" element={<SaleDashboard />} />
+                )}
+                {currentUser?.role === 'admin' && (
                   <Route path="" element={<MarketingDashboard />} />
                 )}
-                <Route element={<ProtectedRoute allowedRoles={['R00']} />}>
+                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                   <Route path="user" element={<AccountList />} />
                 </Route>
-                <Route element={<ProtectedRoute allowedRoles={['R03']} />}>
+                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                   <Route path="product" element={<ManageProductList />} />
                   <Route path="customer" element={<ManageCustomerList />} />
                   <Route path="post" element={<ManagePostList />} />

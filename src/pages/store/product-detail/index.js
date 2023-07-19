@@ -114,6 +114,7 @@ const ProductDetail = () => {
 
   //Hook
   const [form] = Form.useForm();
+  const [products, setProducts] = useState([]);
   const [btnExpand, setBtnExpand] = useState(true);
   const [productDetail, setProductDetail] = useState({});
   const [moreProductDetail, setMoreProductDetail] = useState({});
@@ -158,20 +159,39 @@ const ProductDetail = () => {
       message.error(`${error.response.data.error}`, 5);
     }
   };
+  const getProducts = () => {
+    getProductListFearture({ perPage: 10, page: 1 })
+      .then((result) => {
+        console.log('result', result);
+        setProducts(result?.list);
+      })
+      .catch((e) => console.log(e));
+  };
   const getProductById = (productId) => {
     getProductDetailById(productId)
       .then((res) => {
         //Set product detail
-        setProductDetail(res);
-        const { author, publisher, publicDate, language, pages } =
-          res.briefInformation;
+        console.log('test', res.product);
+        setProductDetail(res.product);
+
+        const {
+          categoryID,
+          productName,
+          image,
+          quantity,
+          description,
+          price,
+          weight,
+        } = res.briefInformation;
         setMoreProductDetail({
-          'Mã hàng': res._id,
-          'NXB ': publisher,
-          'Năm xuất bản': <DateFormat>{publicDate}</DateFormat>,
-          'Tác giả': author,
-          'Số trang': pages,
-          language,
+          id: res._id,
+          productName: productName,
+          categoryID: categoryID,
+          image: image,
+          quantity: quantity,
+          price: price,
+          description: description,
+          weight: weight,
         });
 
         //Set product category
@@ -245,7 +265,7 @@ const ProductDetail = () => {
           >
             {categoryName}
           </Breadcrumb.Item>
-          <Breadcrumb.Item>{productDetail.title}</Breadcrumb.Item>
+          <Breadcrumb.Item>{productDetail.productName}</Breadcrumb.Item>
         </Breadcrumb>
       </WrapperConentContainer>
       <WrapperConentContainer className="products-detail-intro">
@@ -275,9 +295,9 @@ const ProductDetail = () => {
                 </Col> */}
                 <Col style={{ textAlign: 'center' }} span={21}>
                   <Image
-                    height={'34vh'}
+                    height={'50vh'}
                     preview={false}
-                    src={productDetail.thumbnail}
+                    src={productDetail.image}
                   />
                 </Col>
               </Row>
@@ -288,19 +308,19 @@ const ProductDetail = () => {
                 <Col span={12} style={{ textAlign: 'center' }}>
                   <Form.Item style={{ width: '100%', textAlign: 'center' }}>
                     <button
-                      style={{ width: '80%' }}
+                      style={{ width: '86%', height: '4rem' }}
                       className="btn-cart"
                       onClick={() => addToCart(false)}
                     >
-                      <ShoppingCartOutlined style={{ fontSize: '25px' }} /> Thêm
-                      vào giỏ hàng
+                      <ShoppingCartOutlined style={{ fontSize: '25px' }} />
+                      <span>Thêm vào giỏ hàng</span>
                     </button>
                   </Form.Item>
                 </Col>
                 <Col span={12} style={{ textAlign: 'center' }}>
                   <Form.Item style={{ width: '100%' }}>
                     <button
-                      style={{ width: '80%' }}
+                      style={{ width: '80%', height: '4rem' }}
                       onClick={() => addToCart(true)}
                       className="btn-buy"
                     >
@@ -311,30 +331,30 @@ const ProductDetail = () => {
               </Row>
             </Col>
             <Col className="detail-info" span={14}>
-              <h1>{productDetail.title}</h1>
+              <h1>{productDetail.productName}</h1>
               <Descriptions column={2}>
-                <Descriptions.Item span={1} label="Nhà xuất bản">
+                <Descriptions.Item span={1} label="Gía bán">
                   <div className="infor-text">
-                    {productDetail?.briefInformation?.publisher}
+                    {productDetail.price}
                   </div>
                 </Descriptions.Item>
-                <Descriptions.Item span={1} label="Tác giả">
+                <Descriptions.Item span={1} label="Số lương">
                   <div className="infor-text">
-                    {productDetail?.briefInformation?.author}
+                    {productDetail.quantity}
                   </div>
                 </Descriptions.Item>
-                <Descriptions.Item span={1} label="Ngày phát hành">
+                <Descriptions.Item span={1} label="Cân nặng">
                   <div className="infor-text">
-                    <DateFormat>
-                      {productDetail?.briefInformation?.publicDate}
-                    </DateFormat>
+                    
+                      {productDetail.weight}
+                    
                   </div>
                 </Descriptions.Item>
-                <Descriptions.Item span={1} label="Số trang">
+                {/* <Descriptions.Item span={1} label="Phân loại ">
                   <div className="infor-text">
-                    {productDetail?.briefInformation?.pages}
+                    {productDetail.}
                   </div>
-                </Descriptions.Item>
+                </Descriptions.Item> */}
               </Descriptions>
               <Rate style={{ fontSize: '15px' }} defaultValue={4} />
               <div className="detail-sale">
@@ -392,7 +412,7 @@ const ProductDetail = () => {
           </h2>
           <Divider style={{ margin: '18px 0' }} />
           <Row justify="space-evenly">
-            {productFeatures.map((item) => (
+            {products.map((item) => (
               <Col flex={'19%'} style={{ marginBottom: '30px' }}>
                 <Card
                   className="product-card"
@@ -409,7 +429,7 @@ const ProductDetail = () => {
                         margin: '0 auto',
                       }}
                       alt="example"
-                      src={item.thumbnail}
+                      src={item.image}
                     />
                   }
                 >
@@ -421,11 +441,11 @@ const ProductDetail = () => {
                     }}
                   >
                     <a onClick={() => navigate(`/product-detail/${item._id}`)}>
-                      {item.title}
+                      {item.productName}
                     </a>
                   </Typography.Paragraph>
                   <Typography.Text className="product-price">
-                    <MoneyFormat>{item.salePrice}</MoneyFormat>
+                    <MoneyFormat>{item.price}</MoneyFormat>
                   </Typography.Text>
                   <Rate className="product-rate" value={5} />
                 </Card>

@@ -4,7 +4,7 @@ import { Button, Col, Form, Input, message, Row, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import bgLogin from 'assets/bgLogin.png';
-import logo from 'assets/logo-new.png';
+import logo from 'assets/logo_1.png';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosClient from 'util/axiosClient';
 import { async } from '@firebase/util';

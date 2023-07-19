@@ -8,8 +8,9 @@ import axiosClient from 'util/axiosClient';
 
 const ProtectedRoute = ({ allowedRoles }) => {
   const naviage = useNavigate();
-
+  console.log(localStorage.getItem('__role'));
   if (!allowedRoles.some((role) => role === localStorage.getItem('__role'))) {
+    console.log('alo alo ');
     return <NotAuthorizePage />;
     // return <Navigate to={'/401'} replace />;
   }
